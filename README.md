@@ -23,9 +23,13 @@ pretty looking graphs, tables, line charts, etc.
 
 **To Setup or Run**
 
+First, get a copy of this code
+
+    git clone https://github.com/spcnvdr/climatic.git
+
 Change into the web directory with cd
 
-    cd code/web
+    cd climatic/code
 
 Create the virtual environment if this is the first run
 
@@ -61,6 +65,9 @@ The default credentials are:
 - [ ] Determine the exact format of CSV files to use
 - [ ] Finish the web page that will parse CSV files and display information
 - [ ] Make it possible to change the username and password
+- [ ] Remove old, unneeded templates
+- [ ] Use toasts for all alerts
+- [ ] Add space between menu bar and content on all pages, not just home
 
 
 **Contributing**
