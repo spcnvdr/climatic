@@ -5,5 +5,13 @@ climatic (0.0.1) urgency=low;
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 11:49:38 -0600
 
 
+climatic (0.0.2) urgency=low;
+  * Updated README to fix errors and add tasks to TODO list
+  * Bump version
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 12:06:32 -0600
+
+
+
 use the 'date -R' command to make the date string.
 
