@@ -8,11 +8,12 @@ from flask import Flask, render_template, redirect, url_for, request, \
 from functools import wraps
 from datetime import datetime
 
+import controllers.CSVController
+
 app = Flask(__name__)
 
 app.secret_key = "ls[F4U3yYkzI#%^wfupqXC3@fXSp"
 
-import controllers.CSVController
 
 def login_required(f):
     @wraps(f)
@@ -27,40 +28,12 @@ def login_required(f):
 
 
 @app.route("/")
-@login_required
 def home():
     now = datetime.now()
     date_str = now.ctime()
-    if session["logged_in"]:
-        return render_template("home.html", date=date_str)
-    else:
-        return render_template("login.html")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    error = None
-    if request.method == "POST":
-        if request.form["username"] != "admin" or \
-                request.form["password"] != "admin":
-            error = "Invalid credentials"
-        else:
-            session["logged_in"] = True
-            flash("You have successfuly logged in")
-            return redirect(url_for("home"))
-    return render_template("login.html", error=error)
-
-
-@app.route("/logout")
-@login_required
-def logout():
-    session.pop("logged_in", None)
-    flash("You have logged out")
-    return redirect(url_for('login'))
-
+    return render_template("home.html", date=date_str)
 
 @app.route("/sandbox")
-@login_required
 def sandbox():
     now = datetime.now()
     date_str = now.ctime()
@@ -68,7 +41,6 @@ def sandbox():
 
 # Test page route
 @app.route("/testpage")
-@login_required
 def testpage():
     # Return the rendered HTML template
     return render_template("testpage.html")
