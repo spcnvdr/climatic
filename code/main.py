@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 app.secret_key = "ls[F4U3yYkzI#%^wfupqXC3@fXSp"
 
-import controllers.CSVController
+from code.controllers import CSVController
 
 def login_required(f):
     @wraps(f)
