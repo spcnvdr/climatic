@@ -2,7 +2,7 @@ import pytest
 from code.main import app
 
 @pytest.fixture(scope='module')
-def test_client():
+def www():
     flask_app = app
     testing_client = flask_app.test_client()
     ctx = flask_app.app_context()
