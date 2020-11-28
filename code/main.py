@@ -7,9 +7,11 @@ from flask import Flask, render_template, redirect, url_for, request, \
     session, flash
 from functools import wraps
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
+app.storage_path = os.path.join(os.path.realpath(__file__), '..', 'storage')
 app.secret_key = "ls[F4U3yYkzI#%^wfupqXC3@fXSp"
 
 from code.controllers import CSVController
