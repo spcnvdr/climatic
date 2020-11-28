@@ -1,14 +1,8 @@
-climatic (0.0.3) urgency=low;
-  * Merged in the pull request from ghzb. The /test route does not seem to 
-    work yet
-  * Add contributer code of conduct and advice regarding contributing
-  * Added an empty row in the base HTML template to put space between the
-    menu and the content on the page
-  * Fixed old, incorrect comment
-  * Removed most of the code that handles authentication, some old code still
-    remains and will eventually be removed
+climatic (0.0.1) urgency=low;
+  * Initial commit with license, readme, and changelog
+  * Added Flask skeleton website
 
-  -- Bryan Hawkins <spcnvdrr@protonmail.com> Thu, 26 Nov 2020 13:52:40 -0600
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 11:49:38 -0600
 
 
 climatic (0.0.2) urgency=low;
@@ -18,12 +12,6 @@ climatic (0.0.2) urgency=low;
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 12:06:32 -0600
 
 
-climatic (0.0.1) urgency=low;
-  * Initial commit with license, readme, and changelog
-  * Added Flask skeleton website
-
-  -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 11:49:38 -0600
-
-
 
 use the 'date -R' command to make the date string.
+
