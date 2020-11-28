@@ -5,6 +5,7 @@ import os
 import pandas
 import time
 
+
 def has_allowed_ext(filename, extensions):
     # print(filename.rsplit('.', 1))
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in extensions
@@ -23,6 +24,7 @@ def hash_filename(filename):
     _, ext = secure_filename(filename).rsplit('.', 1)
     current_time = int(round(time.time() * 1000))
     return str(hash(str(current_time) + filename)) + '.' + ext
+
 
 
 @app.route('/test', methods=['GET'])
@@ -59,3 +61,4 @@ def upload_csv():
     else:
         flash('Could not upload or parse file')
     return redirect(request.referrer)
+
