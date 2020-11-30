@@ -76,5 +76,13 @@ def testpage():
     return render_template("testpage.html")
 
 
+@app.route("/theme/toggle", methods=["POST"])
+def theme_toggle():
+    mode = request.form.get('mode', 'light')
+    session['theme'] = mode
+    return mode
+
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
