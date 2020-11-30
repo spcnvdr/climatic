@@ -4,7 +4,6 @@ climatic (0.0.4) urgency=low;
 
 -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 30 Nov 2020 13:48:12 -0600
 
-
 climatic (0.0.3) urgency=low;
   * Merged in the pull request from ghzb. The /test route does not seem to 
     work yet
@@ -30,7 +29,6 @@ climatic (0.0.1) urgency=low;
   * Added Flask skeleton website
 
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 11:49:38 -0600
-
 
 
 use the 'date -R' command to make the date string.
