@@ -1,3 +1,12 @@
+climatic (0.0.5) urgency=high;
+  * Reverted the previous pull request because of the numerous conflicts made
+    with the main branch. Specifically, all the progress made on the Flask code
+	was undone by the pull request. This was reverted back to the way the
+	repsitory way in tag 0.0.3.
+  * Removed a bad line from the requirements.txt file
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 30 Nov 2020 14:14:13 -0600
+
 climatic (0.0.4) urgency=low;
   * Merged a pull request that modified the changelog in a negative way.
   Restored the history of the changelog
