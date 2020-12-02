@@ -1,5 +1,5 @@
 import pytest
-from code.main import app
+from src.main import app
 
 @pytest.fixture(scope='module')
 def www():

@@ -1,4 +1,4 @@
-from code.main import app
+from src.main import app
 from flask import request, redirect, flash, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os

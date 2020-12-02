@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.storage_path = os.path.join(os.path.realpath(__file__), '..', 'storage')
 app.secret_key = "ls[F4U3yYkzI#%^wfupqXC3@fXSp"
 
-from code.controllers import CSVController
+from src.controllers import CSVController
 
 def login_required(f):
     @wraps(f)
