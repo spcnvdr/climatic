@@ -1,3 +1,9 @@
+climatic (0.1.0) urgency=med;
+  * Added the data collector program which continually runs, collects
+    temperature and humidity data, and appends it to a CSV file.
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Sun, 13 Dec 2020 13:41:15 -0600
+
 climatic (0.0.6) urgency=high;
   * Renamed code folder to src to resolve conflict with Werkzeug package
 

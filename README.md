@@ -29,7 +29,7 @@ First, get a copy of this code
 
 Change into the web directory with cd
 
-    cd climatic/code
+    cd climatic/src
 
 Create the virtual environment if this is the first run
 
