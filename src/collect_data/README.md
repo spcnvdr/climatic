@@ -9,9 +9,7 @@ analysis.
 **The Software**
 
 The software will use Python 3.x.x and requires the RPi.GPIO library. It also 
-depends on the apscheduler library. It is a good idea to install the 
-apscheduler library outside of a virtual environment as the RPi.GPIO library 
-did not play nicely with virtual environments.
+depends on the apscheduler library. 
 
 **The Hardware**
 

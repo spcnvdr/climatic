@@ -1,3 +1,10 @@
+climatic (0.2.2) urgency=low;
+  * Removed old code
+  * Fixed incorrect information in the collect_data README.md
+ 
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 21 Dec 2020 13:09:11 -0600
+
+
 climatic (0.2.1) urgency=high;
   * Fixed bug introduced by removing old code.
  
@@ -45,6 +52,7 @@ climatic (0.0.4) urgency=low;
     Restored the history of the changelog
 
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 30 Nov 2020 13:48:12 -0600
+
 
 climatic (0.0.3) urgency=low;
   * Merged in the pull request from ghzb. The /test route does not seem to 

@@ -32,17 +32,14 @@ def home():
     date_str = now.ctime()
     return render_template("home.html", date=date_str)
 
-@app.route("/sandbox")
-def sandbox():
-    now = datetime.now()
-    date_str = now.ctime()
-    return render_template("sandbox.html", date=date_str)
 
 # Test page route
 @app.route("/testpage")
 def testpage():
+    now = datetime.now()
+    date_str = now.ctime()
     # Return the rendered HTML template
-    return render_template("testpage.html")
+    return render_template("testpage.html", date=date_str)
 
 
 if __name__ == "__main__":
