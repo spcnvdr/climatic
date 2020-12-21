@@ -1,8 +1,22 @@
+climatic (0.2.0) urgency=med;
+  * Updated data collection program, now stores temperature in Fahrenheit too.
+  * Added an example CSV file to demonstrate the data produced by 
+    the collect_data.py logger
+  * Update README.md
+  * Remove unnecessary or old code
+  * Fixed previous changelog entry that incorrectly used tabs instead of 
+    spaces
+  * Fixed spelling issues
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 21 Dec 2020 12:09:08 -0600
+
+
 climatic (0.1.0) urgency=med;
   * Added the data collector program which continually runs, collects
     temperature and humidity data, and appends it to a CSV file.
 
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Sun, 13 Dec 2020 13:41:15 -0600
+
 
 climatic (0.0.6) urgency=high;
   * Renamed code folder to src to resolve conflict with Werkzeug package
@@ -13,8 +27,8 @@ climatic (0.0.6) urgency=high;
 climatic (0.0.5) urgency=high;
   * Reverted the previous pull request because of the numerous conflicts made
     with the main branch. Specifically, all the progress made on the Flask code
-	was undone by the pull request. This was reverted back to the way the
-	repsitory way in tag 0.0.3.
+    was undone by the pull request. This was reverted back to the way the
+    repository way in tag 0.0.3.
   * Removed a bad line from the requirements.txt file
 
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 30 Nov 2020 14:14:13 -0600
@@ -22,14 +36,14 @@ climatic (0.0.5) urgency=high;
 
 climatic (0.0.4) urgency=low;
   * Merged a pull request that modified the changelog in a negative way.
-  Restored the history of the changelog
+    Restored the history of the changelog
 
--- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 30 Nov 2020 13:48:12 -0600
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 30 Nov 2020 13:48:12 -0600
 
 climatic (0.0.3) urgency=low;
   * Merged in the pull request from ghzb. The /test route does not seem to 
     work yet
-  * Add contributer code of conduct and advice regarding contributing
+  * Add contributor code of conduct and advice regarding contributing
   * Added an empty row in the base HTML template to put space between the
     menu and the content on the page
   * Fixed old, incorrect comment
@@ -47,7 +61,7 @@ climatic (0.0.2) urgency=low;
 
 
 climatic (0.0.1) urgency=low;
-  * Initial commit with license, readme, and changelog
+  * Initial commit with license, README, and changelog
   * Added Flask skeleton website
 
   -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 25 Nov 2020 11:49:38 -0600

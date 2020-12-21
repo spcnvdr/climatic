@@ -1,27 +1,30 @@
 #!/usr/bin/env python3
-##########################################################################
-# This program interfaces with a DHT11 sensor to collect temperature     #
-# and humidity data before appending it to a CSV file. The output file   #
-# is created if it does not already exist. By default, the data is       #
-# collected and appended to the CSV file every hour by default. In the   #
-# future, add ability to change the measurement interval.
-#                                                                        #
-# When looking at the DHT11 module from the front, the physical          #
-# connections are as follows:                                            #
-# DHT11 GND (pin 1) to Raspberry Pi ground                               #
-# DHT11 DATA (pin 2) to Raspberry Pi pin 7                               #
-# DHT11 VCC to 5 volts                                                   #
-# NOTE: The above connection scheme is the exact same one as provided in #
-# the Kuman kit code examples. Check the documentation for the DHT11     #
-# example for more information.                                          #
-#                                                                        #
-# To use: first install apscheduler system wide because the Rpi.GPIO     #
-# library does not work in a virtual environment!!!                      #
-# To setup, run this command: pip3 install apscheduler                   #
-# To run normally putting the output data in current directory:          #
-#    ./collect_data.py                                                   #
-# To run in background: ./collect_data.py &                              #
-##########################################################################
+###########################################################################
+# This program interfaces with a DHT11 sensor to collect temperature      #
+# and humidity data before appending it to a CSV file. The output file    #
+# is created if it does not already exist. By default, the data is        #
+# collected and appended to the CSV file every hour by default. In the    #
+# future, add ability to change the measurement interval.                 #
+#                                                                         #
+# The CSV output creates the following columns:                           #
+# timestamp, temperature in C, Temperature in F, humidity as a percentage #
+#                                                                         #
+# When looking at the DHT11 module from the front, the physical           #
+# connections are as follows:                                             #
+# DHT11 GND (pin 1) to Raspberry Pi ground                                #
+# DHT11 DATA (pin 2) to Raspberry Pi pin 7                                #
+# DHT11 VCC to 5 volts                                                    #
+# NOTE: The above connection scheme is the exact same one as provided in  #
+# the Kuman kit code examples. Check the documentation for the DHT11      #
+# example for more information.                                           #
+#                                                                         #
+# To use: first install apscheduler system wide because the Rpi.GPIO      #
+# library does not work in a virtual environment!!!                       #
+# To setup, run this command: pip3 install apscheduler                    #
+# To run normally putting the output data in current directory:           #
+#    ./collect_data.py                                                    #
+# To run in background: ./collect_data.py &                               #
+###########################################################################
 
 import argparse, os, sys, time, csv
 from datetime import datetime
@@ -33,6 +36,7 @@ CSV_FILE = "climate_data.csv"
 
 # Number of seconds in an hour, collect temp/humidity every hour
 HOUR = 3600
+
 # Verbose mode
 VERBOSE = False
 
@@ -41,15 +45,25 @@ sched = BlockingScheduler()
 outfile = CSV_FILE
 
 
+# Convert a temperature in Celsius to Fahrenheit
+#  @param temperature the temperature in Celsius to convert
+#  @returns temperature as a float
+#
+def ctof(temperature):
+	return ((temperature / 5) * 9 ) + 32
+
+
 # Interface with DHT11 and return a list of current temp and humidity
-#  @returns on success a list is returned which contains two items, 
-#  first is the temperature in Celsius and the second item is the 
-#  humidity as a percentage. 
+#  @returns on success a list is returned which contains three items, 
+#  first is the temperature in Celsius, next is the temperature in Fahrenheit,
+#  and the last item is the humidity as a percentage. 
 #
 def collect():
     THdata = []
     channel = 7
     data = []
+    
+    # Set up GPIO pin and send start condition
     GPIO.setmode(GPIO.BOARD)
     time.sleep(2)
     GPIO.setup(channel, GPIO.OUT)
@@ -57,10 +71,15 @@ def collect():
     time.sleep(0.02)
     GPIO.output(channel, GPIO.HIGH)
     GPIO.setup(channel, GPIO.IN)
+    
+    # wait for Pi to finish sending start and 
+    # wait for ACK from DHT11
     while GPIO.input(channel) == GPIO.LOW:
         continue
     while GPIO.input(channel) == GPIO.HIGH:
         continue
+    
+    # Begin data transfer, data sent in 40 bit chunks
     j = 0
     while j < 40:
         k = 0
@@ -86,6 +105,9 @@ def collect():
     temperature = 0
     temperature_point = 0
     check = 0
+    
+    # Convert the raw bits into whole and fractional parts, e.g. 23.8C
+    # compute checksum and store in the check variable
     for i in range(8):
         humidity += humidity_bit[i] * 2 ** (7 - i)
         humidity_point += humidity_point_bit[i] * 2 ** (7 - i)
@@ -94,15 +116,21 @@ def collect():
         check += check_bit[i] * 2 ** (7 - i)
     tmp = humidity + humidity_point + temperature + temperature_point
     if check == tmp:
-        if VERBOSE:
-            print("temperature: %d.%d" %(temperature,temperature_point),"C","\thumidity:", humidity, "%")
-        THdata.append(str(temperature) + "." + str(temperature_point) + "C")
+        THdata.append(str(temperature) + "." + str(temperature_point))
+        # Convert C to F and append to returned data
+        temp = float(THdata[0])
+        f = "{:.4}".format(ctof(temp))
+        THdata.append(f)
         THdata.append(str(humidity) + "%")
+        now = str(datetime.now())
+        if VERBOSE:
+            print("%s: temperature: %sC %sF\thumidity: %s" % (now, THdata[0], THdata[1], THdata[2]))
         return THdata
     else:
-        # wrong?
+        # bad checksum, try again...
         time.sleep(1)
         return collect()
+
 
 
 # Collect temperature and humidity data every hour
@@ -113,9 +141,10 @@ def timed_job():
     data.append(str(datetime.now()))
     # collect data
     dhtdata = collect()
-    # append temp in C and humidity as a percentage to CSV file
+    # append temp in C, F, and humidity as a percentage to CSV file
     data.append(dhtdata[0])
     data.append(dhtdata[1])
+    data.append(dhtdata[2])
     append_data(outfile, data)
 
 

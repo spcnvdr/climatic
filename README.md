@@ -1,17 +1,24 @@
 # Climatic - Python 3.x.x Group Project Part 2
 
-The purpose of this Git repository and its contents is for the experimentation
-and development of the second part of the Internet of Things Group Project
-part 2 for the Fall 2020 semester. 
+
 The goal of this project is to create a single Flask web page that 
 either allows users to upload a CSV file or to use the current CSV file 
-maintained by the web server. The web page will download the CSV file from the 
+maintained by the web server. The web page will take the CSV file from the 
 user, parse its contents, and (if valid) display information about the contents
 of the file. The file is to contain information in CSV format, with Linux/UNIX
 line endings (LF). The data in the CSV file will contain the current
 temperature, humidity, date and time of collection, and any other pertinent 
 information that can be gathered and stored by either additional sensors or 
-by the Raspberry Pi itself.
+by the Raspberry Pi itself. 
+
+The goal is to perform the CSV file parsing and any other calculations 
+entirely on the client side. This will simplify the project in a way because 
+the server will not have to handle file uploads and 
+unexpected input from untrusted sources.
+
+Currently, the logging component is separate from the server to allow it to be 
+run independently. The temperature and humidity logging program is in the 
+collect_data folder. 
 
 **The Software**
 
@@ -54,20 +61,16 @@ Then open a web browser to port 5000 on the localhost:
 By default, the web server will listen on any public IP address and can be 
 reached by any device on the same network, so be careful!
 
-The default credentials are:
-
-    username: admin
-
-    password: admin
 
 **To Do**
 
-- [ ] Determine the exact format of CSV files to use
+- [x] Determine the exact format of CSV files to use
 - [ ] Finish the web page that will parse CSV files and display information
 - [ ] ~~Make it possible to change the username and password~~
 - [ ] Remove old, unneeded templates
 - [ ] Use toasts for all alerts
 - [x] Add space between menu bar and content on all pages, not just home
+- [ ] Manage JavaScript dependencies in a conventional manner
 
 
 **Contributing**

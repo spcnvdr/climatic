@@ -31,11 +31,15 @@ Change into the data collection directory with cd
 
     cd climatic/src/collect_data/
 
-Install the APSchedular library with Pip or the included requirements.txt file
+Setup a virtual environment to avoid polluting the system's Python packages
 
-    pip3 install apscheduler
+    python3 -m venv venv
 
-OR
+Activate the virtual environment
+
+    source venv/bin/activate
+
+Install the required packages with Pip3
 
     pip3 install -r requirements.txt
 
@@ -75,3 +79,7 @@ down
     fg
 
     Ctrl+c
+
+**To Do**
+
+- [ ] Write column definitions at top of file when new CSV out file used
