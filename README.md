@@ -1,4 +1,4 @@
-# Climatic - Python 3.x.x Group Project Part 2
+# Climatic - Python 3.x.x Temperature and Humidity Analyzer
 
 
 The goal of this project is to create a single Flask web page that 

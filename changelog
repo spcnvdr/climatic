@@ -1,3 +1,9 @@
+climatic (0.2.3) urgency=low;
+  * Update README.md
+ 
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 21 Dec 2020 13:17:44 -0600
+
+
 climatic (0.2.2) urgency=low;
   * Removed old code
   * Fixed incorrect information in the collect_data README.md
