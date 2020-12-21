@@ -1,3 +1,9 @@
+climatic (0.2.1) urgency=high;
+  * Fixed bug introduced by removing old code.
+ 
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Mon, 21 Dec 2020 12:29:11 -0600
+
+
 climatic (0.2.0) urgency=med;
   * Updated data collection program, now stores temperature in Fahrenheit too.
   * Added an example CSV file to demonstrate the data produced by 

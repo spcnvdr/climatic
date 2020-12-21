@@ -8,7 +8,6 @@ from flask import Flask, render_template, redirect, url_for, request, \
 from functools import wraps
 from datetime import datetime
 
-import controllers.CSVController
 
 app = Flask(__name__)
 
