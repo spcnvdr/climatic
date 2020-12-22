@@ -1,24 +1,27 @@
 # Climatic - Python 3.x.x Temperature and Humidity Analyzer
 
 
-The goal of this project is to create a single Flask web page that 
-either allows users to upload a CSV file or to use the current CSV file 
-maintained by the web server. The web page will take the CSV file from the 
-user, parse its contents, and (if valid) display information about the contents
-of the file. The file is to contain information in CSV format, with Linux/UNIX
-line endings (LF). The data in the CSV file will contain the current
-temperature, humidity, date and time of collection, and any other pertinent 
-information that can be gathered and stored by either additional sensors or 
-by the Raspberry Pi itself. 
+The goal of this project is to create a single Flask web page that parses CSV
+files containg temperature and humidity data. Users can upload their own CSV 
+file or use the CSV file created by the logger and hosted by the web server.
+The web page will take the CSV file from the user, parse its contents, and 
+(if valid) display information about the contents of the file. The file 
+will be in CSV format, with Linux/UNIX line endings (LF). The data in the 
+CSV file will contain the current temperature, humidity, date and time of 
+collection, and any other pertinent information that can be gathered and 
+stored by either additional sensors or by the Raspberry Pi itself. 
+An example of the data expected by the project is included in the 
+example.csv file.
 
 The goal is to perform the CSV file parsing and any other calculations 
 entirely on the client side. This will simplify the project in a way because 
-the server will not have to handle file uploads and 
-unexpected input from untrusted sources.
+the server will not have to handle file uploads and unexpected input 
+from untrusted sources.
 
 Currently, the logging component is separate from the server to allow it to be 
 run independently. The temperature and humidity logging program is in the 
-collect_data folder. 
+collect_data folder. Instructions for setting up and running the data logger 
+is included in the collect_data README.md. 
 
 **The Software**
 
@@ -95,9 +98,9 @@ can be found in the LICENSE file. A copy can also be found at the
 
 **Acknowledgments**
 
-This project makes use of many other open source software. This project would
-not be possible without the hard work of other software developers. Below is a 
-list of projects that are used by this code and links to their respective 
+This project uses many other open source projects. This project would
+not be possible without the hard work of other developers. Below is a 
+list of projects used by Climatic and links to their respective 
 websites are given as well. This list is NOT exhaustive and in no particular 
 order. The list below is subject to change without notice. 
 

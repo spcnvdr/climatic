@@ -2,7 +2,7 @@
 
 This program collects the current temperature and humidity and writes it to a
 CSV file every hour. This requires a DHT11 module, a Raspberry Pi, and to 
-have Rpi.GPIO installed on the Raspberry Pi. The current  version requires a 
+have Rpi.GPIO installed on the Raspberry Pi. The current version requires a 
 user to manually execute this program to begin collecting data for later 
 analysis.
 

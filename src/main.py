@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 ###########################################################################
-# Stupid basic, ugly website that allows logins to view a secret web page #
-# Probably not secure                                                     #
+# Start of Flask web page                                                 #
 ###########################################################################
 from flask import Flask, render_template, redirect, url_for, request, \
     session, flash

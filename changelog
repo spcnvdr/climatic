@@ -1,3 +1,9 @@
+climatic (0.2.5) urgency=low;
+  * Fixed misspellings and various errors in comments and documentation
+ 
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Tue, 22 Dec 2020 12:03:45 -0600
+
+
 climatic (0.2.4) urgency=low;
   * When creating a CSV file, include column definitions as the first row
   * Update collect_data README.md

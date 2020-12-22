@@ -166,7 +166,7 @@ def create_csv(filename):
 # Append a row of data to the CSV file, creating it if necessary
 #  @param filename string the name of the CSV file to open
 #  @param data a list of strings containing the data to append
-#  @returns number of bytes wrote to the file
+#  @returns number of bytes successfully stored in the CSV file
 #
 def append_data(filename, data):
     n = 0
