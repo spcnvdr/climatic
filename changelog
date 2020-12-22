@@ -1,3 +1,10 @@
+climatic (0.2.4) urgency=low;
+  * When creating a CSV file, include column definitions as the first row
+  * Update collect_data README.md
+ 
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Tue, 22 Dec 2020 11:32:22 -0600
+
+
 climatic (0.2.3) urgency=low;
   * Update README.md
  

@@ -27,12 +27,16 @@
 ###########################################################################
 
 import argparse, os, sys, time, csv
+from os.path import isfile
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 import RPi.GPIO as GPIO
 
 # Default file name to store data in
 CSV_FILE = "climate_data.csv"
+
+# Columns definitions for the CSV file
+COLUMNS = ["Timestamp", "Celsius", "Fahrenheit", "Humidity"]
 
 # Number of seconds in an hour, collect temp/humidity every hour
 HOUR = 3600
@@ -148,13 +152,27 @@ def timed_job():
     append_data(outfile, data)
 
 
-# Append a row of data to the CSV file
+# Create a new CSV file with the correct column definitions
+# called if the CSV file to append to does not exist
+#  @param filename the name of CSV file to create
+#
+def create_csv(filename):
+    with open(filename, "a", newline="") as fd:
+        writer = csv.writer(fd)
+        writer.writerow(COLUMNS)
+
+
+
+# Append a row of data to the CSV file, creating it if necessary
 #  @param filename string the name of the CSV file to open
 #  @param data a list of strings containing the data to append
 #  @returns number of bytes wrote to the file
 #
 def append_data(filename, data):
     n = 0
+    if not isfile(filename):
+        create_csv(filename)
+
     with open(filename, "a", newline="") as fd:
         f = csv.writer(fd)
         n = f.writerow(data)

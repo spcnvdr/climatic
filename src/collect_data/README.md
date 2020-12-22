@@ -80,4 +80,5 @@ down
 
 **To Do**
 
-- [ ] Write column definitions at top of file when new CSV out file used
+- [x] Write column definitions at top of file when new CSV out file used
+- [ ] Add a command line option to change the interval data is collected at
