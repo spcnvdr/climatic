@@ -2,58 +2,94 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Flask Site</title>
+        <title>Climatic</title>
     </head>
     <body>
         {% extends "template.html" %}
         {% block content %}
         <main role="main" class="container">
-            <div class="jumbotron">
-                <h2><span>A simple Flask web site</span></h2>
-                <hr>
-                <p>
-                    This is my simple Flask web site.
-                </p>
-            </div>
         
+            <!--TODO: Put the file input in a form with labels and a analyze button-->
+            <div class="card">
+                <h5 class="card-header">Climatic - CSV Parser</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <input type="file" id="file-input" accept=".csv">
+                    
+                    <div id="error-box" class="alert alert-danger" role="alert" style="margin-top: 16px; display: none;">
+                        <p id="error-msg">Errors go here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This card displays the statistics calculated from 
+                the CSV file 
+            -->
+            <br><br>
+            <div id="stat-card" class="card" style="display: none;">
+                <h5 class="card-header">Statistics</h5>
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <h5 class="text-center">Temperature</h5>
+                            <ul class="list-group">
+                                <li id="max-temp" class="list-group-item"></li>
+                                <li id="min-temp" class="list-group-item"></li>
+                                <li id="avg-temp" class="list-group-item"></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-center">Humidity</h5>
+                            <ul class="list-group">
+                                <li id="max-humidity" class="list-group-item"></li>
+                                <li id="min-humidity" class="list-group-item"></li>
+                                <li id="avg-humidity" class="list-group-item"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This card holds the line graph which either displays all the data
+                points on the graph or the last 15 entries if there are a lot of
+                data points
+            -->
+            <br><br>
+            <div id="graph-card" class="card" style="display: none;">
+                <h5 class="card-header">Line Graph</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Graph of CSV data or the last 15 entries</h5>
+                    <div id="line-graph" style="height: 250px; width: auto;"></div>
+                </div>
+            </div>
+
+            <!-- This card displays the unmodified contents of the CSV file -->
+            <br><br>
+            <div id="raw-card" class="card" style="display: none;">
+                <h5 class="card-header">Raw Data</h5>
+                <div class="card-body">
+                    <div class="list-group" style="overflow-y: auto; max-height: 200px;">
+                        <pre id="file-content"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <br><br>
             <div class="container jumbotron">
                 <h2>Today's Date</h2>
                 <hr>
                 <p>{{date}}</p>
             </div>
-
-            <div class="jumbotron">
-                <h2>Sample Graph</h2>
-                <hr>
-                <div id="chart" style="height: 250px; width: auto;"></div>
-                <script>
-                    new Morris.Line({
-                        // ID of the element in which to draw the chart.
-                        element: 'chart',
-                        // Chart data records -- each entry in this array 
-                        // corresponds to a point on the chart.
-                        data: [
-                            { year: '2008', value: 20 },
-                            { year: '2009', value: 10 },
-                            { year: '2010', value: 5 },
-                            { year: '2011', value: 5 },
-                            { year: '2012', value: 20 },
-                        ],
-                        // The name of the data record attribute that contains 
-                        // x-values.
-                        xkey: 'year',
-                        // A list of names of data record attributes that 
-                        // contain y-values.
-                        ykeys: ['value'],
-                        // Labels for the ykeys -- will be displayed when 
-                        // you hover over the chart.
-                        labels: ['Value']
-                    });
-                </script>
-                <br>
-                <br>
-            </div>
+            <br><br>
         </main>
         {% endblock %}
     </body>
 </html>
+
+{% block scripts %}
+<script type="text/javascript" 
+    src="{{ url_for('static', filename='js/climatic.js') }}"></script>
+{% endblock %}
+
