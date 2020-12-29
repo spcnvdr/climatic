@@ -1,3 +1,20 @@
+climatic (0.3.0) urgency=low;
+  * Got the basic features of the CSV parsing web page working.
+  * Validate uploaded CSV files are in the same format as example.csv
+  * Parse the CSV data and display the raw data in a card at the bottom of the 
+    page
+  * Added a line graph card made with Morris.js, but only show the 15 most 
+    recent entries if there is a lot of data points
+  * Added a statistics card that displays maximum and minimum temperature 
+    and humidity. Also show the date and time when the max/min temp/humidity
+    was seen. Also calculate and display average temperature and humidity.
+  * Hide all cards on error
+  * Replaced generic text in the file upload card with instructions
+  * Fixed missing text in the displayed statistics
+ 
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Tue, 29 Dec 2020 15:33:43 -0600
+
+
 climatic (0.2.5) urgency=low;
   * Fixed misspellings and various errors in comments and documentation
  

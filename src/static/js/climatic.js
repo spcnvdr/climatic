@@ -213,13 +213,13 @@ function calculateStatistics(data){
  */
 function displayStatistics(stats){
 
-    $("#max-temp").text(stats[0]["maxtemp"].toString() + " F" + " - " + getDateString(stats[0]["maxtempdate"]));
-    $("#min-temp").text(stats[0]["mintemp"].toString() + " F" + " - " + getDateString(stats[0]["mintempdate"]));
-    $("#avg-temp").text(stats[0]["avgtemp"].toFixed(2) + " F");
+    $("#max-temp").text("Max: " + stats[0]["maxtemp"].toString() + " F" + " - " + getDateString(stats[0]["maxtempdate"]));
+    $("#min-temp").text("Min: " + stats[0]["mintemp"].toString() + " F" + " - " + getDateString(stats[0]["mintempdate"]));
+    $("#avg-temp").text("Average: " + stats[0]["avgtemp"].toFixed(2) + " F");
 
-    $("#max-humidity").text(stats[0]["maxhumid"].toString() + "%" + " - " + getDateString(stats[0]["maxhumiddate"]));
-    $("#min-humidity").text(stats[0]["minhumid"].toString() + "%" + " - " + getDateString(stats[0]["minhumiddate"]));
-    $("#avg-humidity").text(stats[0]["avghumid"].toFixed(2) + "%");
+    $("#max-humidity").text("Max: " + stats[0]["maxhumid"].toString() + "%" + " - " + getDateString(stats[0]["maxhumiddate"]));
+    $("#min-humidity").text("Min: " + stats[0]["minhumid"].toString() + "%" + " - " + getDateString(stats[0]["minhumiddate"]));
+    $("#avg-humidity").text("Average: " + stats[0]["avghumid"].toFixed(2) + "%");
 }
 
 
