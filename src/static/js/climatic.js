@@ -123,8 +123,7 @@ function handleContents(contents) {
     }
 
     // populate raw data scroll box
-    var element = document.getElementById("file-content");
-    element.textContent = contents;
+    $("#file-content").text(contents);
 
     // parse CSV data into an array
     var data = CSVToArray(contents, ",");
@@ -136,11 +135,12 @@ function handleContents(contents) {
     //console.log(parsed);
     displayStatistics(calculateStatistics(parsed));
     
-    // show all the cards and plot the line graph
+    /* show cards and plot line graph. 
+     * Graph MUST be plotted AFTER card is shown */
     $("#graph-card").show();
     $("#raw-card").show();
     $("#stat-card").show();
-    var line = makeGraph($("#line-graph"), data);
+    var line = makeGraph($("#line-graph"), parsed);
 }
 
 
@@ -282,18 +282,16 @@ function trimData(data){
  * @param {object} rawdata raw CSV data produced by CSVToArray
  * 
  */
-function makeGraph(element, rawdata){
+function makeGraph(element, parseData){
     // Remove the previous graph if it exists
     $("#line-graph").empty();
-    var graphdata;
-    
-    var parsedata = parseData(rawdata);
+    var graphData;
     
     // If more than 15 data points, only show most recent 15
-    if(parsedata.length > 15){
-        graphdata = trimData(parsedata);
+    if(parseData.length > 15){
+        graphData = trimData(parseData);
     } else {
-        graphdata = parsedata;
+        graphData = parseData;
     }
 
     var line = new Morris.Line({
@@ -301,7 +299,7 @@ function makeGraph(element, rawdata){
         element: element,
         // Chart data records -- each entry in this array 
         // corresponds to a point on the chart.
-        data: graphdata,
+        data: graphData,
         // The name of the data record attribute that contains 
         // x-values.
         xkey: 'timestamp',

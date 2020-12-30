@@ -74,6 +74,7 @@ reached by any device on the same network, so be careful!
 - [ ] Use toasts for all alerts
 - [x] Add space between menu bar and content on all pages, not just home
 - [ ] Manage JavaScript dependencies in a conventional manner
+- [ ] Put custom CSS in a separate CSS file instead of using style attribute
 
 
 **Contributing**

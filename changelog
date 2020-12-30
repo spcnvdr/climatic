@@ -1,3 +1,14 @@
+climatic (0.3.3) urgency=low;
+  * Modified climatic.js to only parse CSV data once
+  * Opt for jQuery instead of JavaScript in climatic.js
+  * Added Font Awesome to provide icons
+  * Modified the style of the nav bar in template.html and removed redundant
+    links
+  * Updated TO DO list in README.md
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 30 Dec 2020 13:42:06 -0600
+  
+
 climatic (0.3.2) urgency=high;
   * Correctly stop scheduled jobs when Ctrl-c interrupt is sent to collect_data
   * Move the apscheduler variable into main to reduce the number of global
