@@ -45,15 +45,15 @@ Then run with --help for information about the arguments
 
     ./collect_data.py --help
 
-To test the code without having to wait an hour, open the collect_data.py file
-and modify the HOUR constant near the top of the file. To collect data every 
-10 seconds for testing, change the constant from
+By default, temperature and humidity readings are collected every hour. 
+However, this behavior can be modified with the -t/--time option. 
+To collect data at a different interval use the -t/--time option followed
+by an integer representing how often to collect data in seconds. Note that 
+the minimum interval acceptable is 60 seconds. 
+For example, to collect data every ten minutes (600 seconds), run 
+collect_data with the following option:
 
-    HOUR = 3600
-
-To
-
-    HOUR = 10
+    ./collect_data -t 600
 
 The name of the output CSV file can be changed with the -o argument
 

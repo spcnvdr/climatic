@@ -26,7 +26,9 @@
 # To run in background: ./collect_data.py &                               #
 ###########################################################################
 
-import argparse, os, sys, time, csv
+import argparse
+import time
+import csv
 from os.path import isfile
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -41,6 +43,10 @@ COLUMNS = ["Timestamp", "Celsius", "Fahrenheit", "Humidity"]
 # Number of seconds in an hour, collect temp/humidity every hour
 HOUR = 3600
 
+# The data collection interval in seconds, may be changed on command line
+# with the -t/--time option
+INTERVAL = HOUR
+
 # Verbose mode
 VERBOSE = False
 
@@ -54,19 +60,19 @@ outfile = CSV_FILE
 #  @returns temperature as a float
 #
 def ctof(temperature):
-	return ((temperature / 5) * 9 ) + 32
+    return ((temperature / 5) * 9) + 32
 
 
 # Interface with DHT11 and return a list of current temp and humidity
-#  @returns on success a list is returned which contains three items, 
+#  @returns on success a list is returned which contains three items,
 #  first is the temperature in Celsius, next is the temperature in Fahrenheit,
-#  and the last item is the humidity as a percentage. 
+#  and the last item is the humidity as a percentage.
 #
 def collect():
     THdata = []
     channel = 7
     data = []
-    
+
     # Set up GPIO pin and send start condition
     GPIO.setmode(GPIO.BOARD)
     time.sleep(2)
@@ -75,14 +81,14 @@ def collect():
     time.sleep(0.02)
     GPIO.output(channel, GPIO.HIGH)
     GPIO.setup(channel, GPIO.IN)
-    
-    # wait for Pi to finish sending start and 
+
+    # wait for Pi to finish sending start and
     # wait for ACK from DHT11
     while GPIO.input(channel) == GPIO.LOW:
         continue
     while GPIO.input(channel) == GPIO.HIGH:
         continue
-    
+
     # Begin data transfer, data sent in 40 bit chunks
     j = 0
     while j < 40:
@@ -109,7 +115,7 @@ def collect():
     temperature = 0
     temperature_point = 0
     check = 0
-    
+
     # Convert the raw bits into whole and fractional parts, e.g. 23.8C
     # compute checksum and store in the check variable
     for i in range(8):
@@ -126,9 +132,6 @@ def collect():
         f = "{:.4}".format(ctof(temp))
         THdata.append(f)
         THdata.append(str(humidity) + "%")
-        now = str(datetime.now())
-        if VERBOSE:
-            print("%s: temperature: %sC %sF\thumidity: %s" % (now, THdata[0], THdata[1], THdata[2]))
         return THdata
     else:
         # bad checksum, try again...
@@ -136,9 +139,7 @@ def collect():
         return collect()
 
 
-
 # Collect temperature and humidity data every hour
-@sched.scheduled_job('interval', seconds=HOUR)
 def timed_job():
     data = []
     # create timestamp as first column
@@ -150,6 +151,9 @@ def timed_job():
     data.append(dhtdata[1])
     data.append(dhtdata[2])
     append_data(outfile, data)
+    if VERBOSE:
+        print("%s: temperature: %sC %sF\thumidity: %s" %
+              (data[0], data[1], data[2], data[3]))
 
 
 # Create a new CSV file with the correct column definitions
@@ -162,7 +166,6 @@ def create_csv(filename):
         writer.writerow(COLUMNS)
 
 
-
 # Append a row of data to the CSV file, creating it if necessary
 #  @param filename string the name of the CSV file to open
 #  @param data a list of strings containing the data to append
@@ -170,8 +173,6 @@ def create_csv(filename):
 #
 def append_data(filename, data):
     n = 0
-    if not isfile(filename):
-        create_csv(filename)
 
     with open(filename, "a", newline="") as fd:
         f = csv.writer(fd)
@@ -184,10 +185,14 @@ if __name__ == "__main__":
     # Set up argument parser
     argp = argparse.ArgumentParser("collect_data.py",
                                    description="Use DHT11 to collect and "
-                                   "store temperature and humidity data in a CSV file\n"
-                                   "Connect the DHT11 data pin to Raspberry Pi pin 7")
+                                   "store temperature and humidity data in a "
+                                   "CSV file\nConnect the DHT11 data pin to "
+                                   "Raspberry Pi pin 7")
     argp.add_argument("-o",
                       "--output", help="Store data in a different output file")
+    argp.add_argument("-t",
+                      "--time", help="Collect data every N seconds",
+                      metavar="N", type=int)
     argp.add_argument("-v",
                       "--verbose", help="Enable verbose mode",
                       action="store_true")
@@ -195,16 +200,28 @@ if __name__ == "__main__":
     # Parse arguments
     args = argp.parse_args()
 
-    # If specified, change output file 
+    # If specified, change output file
     if args.output is not None:
         outfile = args.output
 
     # Enable verbose mode if specified
     if args.verbose:
         VERBOSE = True
-    
+
+    # If custom collection interval specified, use it
+    if args.time:
+        if args.time < 60:
+            print("Error: time option CANNOT be less than 60 seconds!")
+            exit(1)
+        INTERVAL = args.time
+
+    # If output file does not exist, create it
+    if not isfile(outfile):
+        create_csv(outfile)
+
     # Start the hourly task
     try:
+        sched.add_job(timed_job, 'interval', seconds=INTERVAL)
         sched.start()
     except KeyboardInterrupt:
         print("Received Ctrl+c, exiting...")

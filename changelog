@@ -1,3 +1,17 @@
+climatic (0.3.1) urgency=low;
+  * Modify collect_data to allow a custom collection interval to be specified
+    with the -t/--time command line option.
+  * Updated collect_data README.md
+  * Moved the code in collect_data the creates the CSV file if it doesn't exist
+    to main so that it is only run once.
+  * Move the verbose print statement from the collect() function to the 
+    timed_job() function.
+  * Ran collect_data through the Python style checker Flake8 and fixed any 
+    issues
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 30 Dec 2020 12:35:36 -0600
+
+
 climatic (0.3.0) urgency=low;
   * Got the basic features of the CSV parsing web page working.
   * Validate uploaded CSV files are in the same format as example.csv
