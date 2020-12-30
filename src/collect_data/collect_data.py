@@ -51,7 +51,6 @@ INTERVAL = HOUR
 VERBOSE = False
 
 # Other globals
-sched = BlockingScheduler()
 outfile = CSV_FILE
 
 
@@ -221,8 +220,10 @@ if __name__ == "__main__":
 
     # Start the hourly task
     try:
+        sched = BlockingScheduler()
         sched.add_job(timed_job, 'interval', seconds=INTERVAL)
         sched.start()
     except KeyboardInterrupt:
         print("Received Ctrl+c, exiting...")
+        sched.shutdown()
         exit(0)

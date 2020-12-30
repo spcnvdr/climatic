@@ -82,4 +82,4 @@ down
 
 - [x] Write column definitions at top of file when new CSV out file used
 - [x] Add a command line option to change the interval data is collected at
-- [ ] Move the sched global in to main()
+- [x] Move the sched global in to main()

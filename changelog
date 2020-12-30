@@ -1,3 +1,11 @@
+climatic (0.3.2) urgency=high;
+  * Correctly stop scheduled jobs when Ctrl-c interrupt is sent to collect_data
+  * Move the apscheduler variable into main to reduce the number of global
+    variables
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Wed, 30 Dec 2020 12:48:39 -0600
+
+
 climatic (0.3.1) urgency=low;
   * Modify collect_data to allow a custom collection interval to be specified
     with the -t/--time command line option.
