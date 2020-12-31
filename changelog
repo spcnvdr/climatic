@@ -1,3 +1,10 @@
+climatic (0.4.2) urgency=high;
+  * Allow up to 150 data points on the graph to show trends over a longer 
+    period of time. Temporary change until switch to Flot.js
+
+  -- In progress...
+
+
 climatic (0.4.1) urgency=high;
   * Fixed a stupid bug in climatic.js that could return bad statistics if 
     a CSV file is uploaded with two data points with the first data point 

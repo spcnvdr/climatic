@@ -264,7 +264,7 @@ function parseData(data){
 }
 
 
-/** Get only the last 15 entries if there is a lot of data points
+/** Get only the last 150 entries if there is a lot of data points
  * @param {object} data parsed CSV data produced by the parseData function
  * @returns {object} a new object containing only the last 15 entries
  * 
@@ -273,7 +273,11 @@ function trimData(data){
     var i;
     var newdata = [];
 
-    for(i = data.length-15; i < data.length; i++){
+    if(data.length <= 150){
+        return data;
+    }
+
+    for(i = data.length-150; i < data.length; i++){
         newdata.push(data[i]);
     }
     return newdata;
@@ -291,7 +295,7 @@ function makeGraph(element, parseData){
     var graphData;
     
     // If more than 15 data points, only show most recent 15
-    if(parseData.length > 15){
+    if(parseData.length > 150){
         graphData = trimData(parseData);
     } else {
         graphData = parseData;
