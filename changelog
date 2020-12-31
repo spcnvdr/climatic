@@ -1,3 +1,19 @@
+climatic (0.4.0) urgency=high;
+  * Use NPM to manage front end dependencies
+  * Updated TO DO list in README.md
+  * Remove all old front end dependencies and expect them to be installed 
+    with NPM
+  * Correct function comment above makeGraph() in climatic.js
+  * Fix template.html due to changes in Font Awesome icon names between the 
+    version served via NPM and the version downloaded directly from the 
+    project's webpage
+  * Remove a bunch of old static files no longer needed, templates from the 
+    old Flask project this project started from, and other files hanging around
+    that will not be used
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Thu, 31 Dec 2020 07:57:40 -0600
+
+
 climatic (0.3.3) urgency=low;
   * Modified climatic.js to only parse CSV data once
   * Opt for jQuery instead of JavaScript in climatic.js

@@ -73,8 +73,10 @@ reached by any device on the same network, so be careful!
 - [ ] Remove old, unneeded templates
 - [ ] Use toasts for all alerts
 - [x] Add space between menu bar and content on all pages, not just home
-- [ ] Manage JavaScript dependencies in a conventional manner
+- [x] Manage JavaScript dependencies in a conventional manner (using npm)
+- [ ] Update README with information on installing required npm packages
 - [ ] Put custom CSS in a separate CSS file instead of using style attribute
+- [ ] Use Flot.js for the line graph instead of Morris.js
 
 
 **Contributing**
@@ -109,7 +111,11 @@ Project - Website
 
 * Python 3.x.x - https://www.python.org/
 
+* Flask - https://flask.palletsprojects.com/en/1.1.x/
+
 * Bootstrap 4 - https://getbootstrap.com/
+
+* Popper.js - https://popper.js.org/
 
 * Popper.js - https://popper.js.org/
 
@@ -120,6 +126,8 @@ Project - Website
 * Raphael - https://dmitrybaranovskiy.github.io/raphael/
 
 * Glyphicons (As part of Bootstrap 4) - https://www.glyphicons.com/
+
+* Font Awesome - https://fontawesome.com/
 
 
 **Security**

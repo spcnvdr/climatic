@@ -1,0 +1,21 @@
+{
+  "name": "climatic",
+  "version": "0.4.0",
+  "description": "simple CSV weather logger and parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spcnvdr/climatic.git"
+  },
+  "author": "spcnvdr",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
+    "raphael": "^2.3.0"
+  }
+}

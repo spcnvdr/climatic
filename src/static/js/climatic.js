@@ -279,7 +279,7 @@ function trimData(data){
 
 /** Make the line graph
  * @param {string} element the element the graph will be anchored to
- * @param {object} rawdata raw CSV data produced by CSVToArray
+ * @param {object} parseData parsed CSV data produced by parseData()
  * 
  */
 function makeGraph(element, parseData){
