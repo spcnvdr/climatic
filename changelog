@@ -1,3 +1,14 @@
+climatic (0.4.1) urgency=high;
+  * Fixed a stupid bug in climatic.js that could return bad statistics if 
+    a CSV file is uploaded with two data points with the first data point 
+    being smaller in temperature or humidity. This was caused by using an 
+    if-else instead of two separate if statements when looking for the 
+    highest and lowest temperature/humidity.
+  * Updated README.md to correctly describe the format of CSV file expected
+  
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Thu, 31 Dec 2020 08:49:43 -0600
+
+
 climatic (0.4.0) urgency=high;
   * Use NPM to manage front end dependencies
   * Updated TO DO list in README.md

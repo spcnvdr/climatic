@@ -6,7 +6,7 @@ files containg temperature and humidity data. Users can upload their own CSV
 file or use the CSV file created by the logger and hosted by the web server.
 The web page will take the CSV file from the user, parse its contents, and 
 (if valid) display information about the contents of the file. The file 
-will be in CSV format, with Linux/UNIX line endings (LF). The data in the 
+will be in CSV format with "\r\n" line endings (Excel format). The data in the 
 CSV file will contain the current temperature, humidity, date and time of 
 collection, and any other pertinent information that can be gathered and 
 stored by either additional sensors or by the Raspberry Pi itself. 

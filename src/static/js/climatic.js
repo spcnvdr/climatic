@@ -176,7 +176,9 @@ function calculateStatistics(data){
             if(data[i]["fahrenheit"] >= hightemp){
                 hightemp = data[i]["fahrenheit"];
                 hightempdate = data[i]["timestamp"];
-            } else if(data[i]["fahrenheit"] <= lowtemp){
+            }
+            
+            if(data[i]["fahrenheit"] <= lowtemp){
                 lowtemp = data[i]["fahrenheit"];
                 lowtempdate = data[i]["timestamp"];
             }
@@ -189,7 +191,8 @@ function calculateStatistics(data){
             if(data[i]["humidity"] >= highhumid){
                 highhumid = data[i]["humidity"];
                 highhumiddate = data[i]["timestamp"];
-            } else if(data[i]["humidity"] <= lowhumid){
+            }
+            if(data[i]["humidity"] <= lowhumid){
                 lowhumid = data[i]["humidity"];
                 lowhumiddate = data[i]["timestamp"];
             }
