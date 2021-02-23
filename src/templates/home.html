@@ -1,93 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Climatic</title>
-    </head>
-    <body>
-        {% extends "template.html" %}
-        {% block content %}
-        <main role="main" class="container">
-        
-            <!--TODO: Put the file input in a form with labels and a analyze button-->
-            <div class="card">
-                <h5 class="card-header">Climatic - CSV Parser</h5>
-                <div class="card-body">
-                    <h5 class="card-title">Select a CSV file to parse...</h5>
-                    <p class="card-text">Select CSV file created by collect_data logger</p>
-                    <input type="file" id="file-input" accept=".csv">
-                    <div id="error-box" class="alert alert-danger" role="alert" style="margin-top: 16px; display: none;">
-                        <p id="error-msg">Errors go here</p>
-                    </div>
+
+{% extends "template.html" %}
+{% block content %}
+<main role="main" class="container">
+
+    <!--TODO: Put the file input in a form with labels and a analyze button-->
+    <div class="card">
+        <h5 class="card-header">Climatic - CSV Parser</h5>
+        <div class="card-body">
+            <h5 class="card-title">Select a CSV file to parse...</h5>
+            <p class="card-text">Select CSV file created by collect_data logger</p>
+            <input type="file" id="file-input" accept=".csv">
+            <div id="error-box" class="alert alert-danger" role="alert" style="margin-top: 16px; display: none;">
+                <p id="error-msg">Errors go here</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- This card displays the statistics calculated from 
+        the CSV file 
+    -->
+    <br><br>
+    <div id="stat-card" class="card" style="display: none;">
+        <h5 class="card-header">Statistics</h5>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h5 class="text-center">Temperature</h5>
+                    <ul class="list-group">
+                        <li id="max-temp" class="list-group-item"></li>
+                        <li id="min-temp" class="list-group-item"></li>
+                        <li id="avg-temp" class="list-group-item"></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-center">Humidity</h5>
+                    <ul class="list-group">
+                        <li id="max-humidity" class="list-group-item"></li>
+                        <li id="min-humidity" class="list-group-item"></li>
+                        <li id="avg-humidity" class="list-group-item"></li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- This card displays the statistics calculated from 
-                the CSV file 
-            -->
-            <br><br>
-            <div id="stat-card" class="card" style="display: none;">
-                <h5 class="card-header">Statistics</h5>
-                <div class="card-body">
-                    <div class="row">
+    <!-- This card holds the line graph which either displays all the data
+        points on the graph or the last 15 entries if there are a lot of
+        data points
+    -->
+    <br><br>
+    <div id="graph-card" class="card" style="display: none;">
+        <h5 class="card-header">Line Graph</h5>
+        <div class="card-body">
+            <h5 class="card-title">Graph of CSV data or the last 100 entries</h5>
+            <div id="line-graph" style="height: 250px; width: auto;"></div>
+        </div>
+    </div>
 
-                        <div class="col-md-6">
-                            <h5 class="text-center">Temperature</h5>
-                            <ul class="list-group">
-                                <li id="max-temp" class="list-group-item"></li>
-                                <li id="min-temp" class="list-group-item"></li>
-                                <li id="avg-temp" class="list-group-item"></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <h5 class="text-center">Humidity</h5>
-                            <ul class="list-group">
-                                <li id="max-humidity" class="list-group-item"></li>
-                                <li id="min-humidity" class="list-group-item"></li>
-                                <li id="avg-humidity" class="list-group-item"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    <!-- This card displays the unmodified contents of the CSV file -->
+    <br><br>
+    <div id="raw-card" class="card" style="display: none;">
+        <h5 class="card-header">Raw Data</h5>
+        <div class="card-body">
+            <div class="list-group" style="overflow-y: auto; max-height: 200px;">
+                <pre id="file-content"></pre>
             </div>
+        </div>
+    </div>
 
-            <!-- This card holds the line graph which either displays all the data
-                points on the graph or the last 15 entries if there are a lot of
-                data points
-            -->
-            <br><br>
-            <div id="graph-card" class="card" style="display: none;">
-                <h5 class="card-header">Line Graph</h5>
-                <div class="card-body">
-                    <h5 class="card-title">Graph of CSV data or the last 100 entries</h5>
-                    <div id="line-graph" style="height: 250px; width: auto;"></div>
-                </div>
-            </div>
+    <br><br>
+    <div class="container jumbotron">
+        <h2>Today's Date</h2>
+        <hr>
+        <p>{{date}}</p>
+    </div>
+    <br><br>
+</main>
+{% endblock %}
 
-            <!-- This card displays the unmodified contents of the CSV file -->
-            <br><br>
-            <div id="raw-card" class="card" style="display: none;">
-                <h5 class="card-header">Raw Data</h5>
-                <div class="card-body">
-                    <div class="list-group" style="overflow-y: auto; max-height: 200px;">
-                        <pre id="file-content"></pre>
-                    </div>
-                </div>
-            </div>
-
-            <br><br>
-            <div class="container jumbotron">
-                <h2>Today's Date</h2>
-                <hr>
-                <p>{{date}}</p>
-            </div>
-            <br><br>
-        </main>
-        {% endblock %}
-    </body>
-</html>
-
-{% block scripts %}
+{% block script %}
 <script type="text/javascript" 
     src="{{ url_for('static', filename='js/climatic.js') }}"></script>
 {% endblock %}

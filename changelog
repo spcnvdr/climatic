@@ -2,7 +2,13 @@ climatic (0.4.2) urgency=high;
   * Allow up to 150 data points on the graph to show trends over a longer 
     period of time. Temporary change until switch to Flot.js
 
-  -- In progress...
+  * Fixed template error in Flask that caused base template to be extended 
+    incorrectly
+  * Removed unused route in main.py
+  * Added option to collect_data.py that automatically starts a new CSV file 
+    every 24 hours
+
+  -- Bryan Hawkins <spcnvdrr@protonmail.com> Tue, 23 Feb 2021 12:11:38 -0600
 
 
 climatic (0.4.1) urgency=high;

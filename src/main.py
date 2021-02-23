@@ -32,14 +32,5 @@ def home():
     return render_template("home.html", date=date_str)
 
 
-# Test page route
-@app.route("/testpage")
-def testpage():
-    now = datetime.now()
-    date_str = now.ctime()
-    # Return the rendered HTML template
-    return render_template("testpage.html", date=date_str)
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)

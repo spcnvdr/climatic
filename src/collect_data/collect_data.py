@@ -18,7 +18,8 @@
 # the Kuman kit code examples. Check the documentation for the DHT11      #
 # example for more information.                                           #
 #                                                                         #
-# To run normally, writing the output data to the current directory:      #
+# To setup, run this command: pip3 install apscheduler                    #
+# To run normally putting the output data in current directory:           #
 #    ./collect_data.py                                                    #
 # To run in background: ./collect_data.py &                               #
 ###########################################################################
@@ -44,11 +45,59 @@ HOUR = 3600
 # with the -t/--time option
 INTERVAL = HOUR
 
-# Verbose mode
+# Verbose and auto mode options
 VERBOSE = False
+AUTO = False
 
 # Other globals
 outfile = CSV_FILE
+
+# save original filename for appending to in auto mode,
+# and the time of the when we started the current CSV output file
+original_file = ""
+start_time = datetime.now()
+
+
+# Create a new, unique file name based on the old file name
+#  @param filename string the old file name
+#  @returns a string consisting of the old filename with the date appended
+#    to it
+#
+def new_filename(filename):
+    newfilename = ""
+    date = datetime.now()
+    # append year, month, day - hour, minute to filename to make it unique
+    strdate = date.strftime("%Y%m%d-%H%M")
+    if "." in filename:
+        temp = filename.split(".")
+        newfilename = temp[0] + strdate + "." + temp[1]
+    else:
+        newfilename = filename + strdate
+    return newfilename
+
+
+# Roll the output file over to a new file
+#  @param filename string the original filename
+#  @returns the new output file name
+#
+def rollover_file(filename):
+    global start_time
+
+    newfile = new_filename(filename)
+    while isfile(newfile):
+        # TODO: Come up with a less shitty solution
+        # If this file already exists, append Xs until we have a unique name
+        if "." in newfile:
+            temp = newfile.split(".")
+            newfile = temp[0] + "X" + "." + temp[1]
+        else:
+            newfile += "X"
+
+    # create the new file
+    create_csv(newfile)
+    # Reset the start time counter
+    start_time = datetime.now()
+    return newfile
 
 
 # Convert a temperature in Celsius to Fahrenheit
@@ -137,11 +186,21 @@ def collect():
 
 # Collect temperature and humidity data every hour
 def timed_job():
+    global outfile
+    days_running = (datetime.now() - start_time).days
+    if AUTO and days_running:
+        outfile = rollover_file(original_file)
+
     data = []
     # create timestamp as first column
     data.append(str(datetime.now()))
     # collect data
     dhtdata = collect()
+    temp_hum = float(dhtdata[2].strip("%"))
+    while(temp_hum > 100):
+        dhtdata = collect()
+        temp_hum = float(dhtdata[2].strip("%"))
+
     # append temp in C, F, and humidity as a percentage to CSV file
     data.append(dhtdata[0])
     data.append(dhtdata[1])
@@ -184,6 +243,9 @@ if __name__ == "__main__":
                                    "store temperature and humidity data in a "
                                    "CSV file\nConnect the DHT11 data pin to "
                                    "Raspberry Pi pin 7")
+    argp.add_argument("-a",
+                      "--auto", help="Automatically store data in a new CSV "
+                      "file every 24 hours", action="store_true")
     argp.add_argument("-o",
                       "--output", help="Store data in a different output file")
     argp.add_argument("-t",
@@ -210,6 +272,12 @@ if __name__ == "__main__":
             print("Error: time option CANNOT be less than 60 seconds!")
             exit(1)
         INTERVAL = args.time
+
+    if args.auto:
+        # enable auto mode, calculate when to roll over based on record count,
+        # and save original filename for later modification
+        AUTO = True
+        original_file = outfile
 
     # If output file does not exist, create it
     if not isfile(outfile):
