@@ -18,10 +18,7 @@
 # the Kuman kit code examples. Check the documentation for the DHT11      #
 # example for more information.                                           #
 #                                                                         #
-# To use: first install apscheduler system wide because the Rpi.GPIO      #
-# library does not work in a virtual environment!!!                       #
-# To setup, run this command: pip3 install apscheduler                    #
-# To run normally putting the output data in current directory:           #
+# To run normally, writing the output data to the current directory:      #
 #    ./collect_data.py                                                    #
 # To run in background: ./collect_data.py &                               #
 ###########################################################################

@@ -23,7 +23,7 @@
  *  @returns {boolean} true if the columns are correct, else false
  */
 function checkColumns(rawData){
-    var firstline = rawData.split("\n")[0].replace(/\s+/g, "");
+    let firstline = rawData.split("\n")[0].replace(/\s+/g, "");
     //console.log(firstline);
     if(firstline != "Timestamp,Celsius,Fahrenheit,Humidity"){
         return false
@@ -38,9 +38,9 @@ function checkColumns(rawData){
  * 
  */
 function verifyFile(rawData){
-    var i;
-    var matches;
-    var splitdata = rawData.split("\n");
+    let i;
+    let matches;
+    let splitdata = rawData.split("\n");
 
     // make sure the column definitions are correct
     if(!checkColumns(rawData)){
@@ -95,7 +95,7 @@ function displayError(message){
  */
 function readSingleFile(e) {
     //console.log(e);
-    var file = e.target.files[0];
+    let file = e.target.files[0];
     if (!file) {
         return;
     }
@@ -126,12 +126,12 @@ function handleContents(contents) {
     $("#file-content").text(contents);
 
     // parse CSV data into an array
-    var data = CSVToArray(contents, ",");
+    let data = CSVToArray(contents, ",");
     
     // debugging
-    //console.log(data);
+    console.log(data);
     //console.log("------------------");
-    var parsed = parseData(data);
+    let parsed = parseData(data);
     //console.log(parsed);
     displayStatistics(calculateStatistics(parsed));
     
@@ -140,7 +140,7 @@ function handleContents(contents) {
     $("#graph-card").show();
     $("#raw-card").show();
     $("#stat-card").show();
-    var line = makeGraph($("#line-graph"), parsed);
+    let line = makeGraph($("#line-graph"), parsed);
 }
 
 
@@ -152,22 +152,22 @@ function handleContents(contents) {
  * 
  */
 function calculateStatistics(data){
-    var hightemp = -1;
-    var lowtemp = 1000000;
+    let hightemp = -1;
+    let lowtemp = 1000000;
 
-    var highhumid = -1;
-    var lowhumid = 1000;
+    let highhumid = -1;
+    let lowhumid = 1000;
 
-    var avgtemp = 0;
-    var tempcount = 0
+    let avgtemp = 0;
+    let tempcount = 0
     
-    var avghumidity = 0;
-    var humidcount = 0;
+    let avghumidity = 0;
+    let humidcount = 0;
     
-    var hightempdate, lowtempdate, highhumiddate, lowhumiddate;
+    let hightempdate, lowtempdate, highhumiddate, lowhumiddate;
 
-    var stats = []
-    var i;
+    let stats = []
+    let i;
     for(i = 0; i < data.length; i++){
         if(data[i].hasOwnProperty("fahrenheit")){
             tempcount++;
@@ -239,15 +239,15 @@ function clearStatistics(){
     $("#avg-humidity").text("");
 }
 
-
+// TODO: use map or forEach??
 /** Parse the raw CSV data array into parsed dates and convert strings to floats
  * @param data raw CSV data produced by CSVToArray
  * @returns {object} a new object containing timestamp, fahrenheit, and humidity data
  * 
  */
 function parseData(data){
-    var newdata = [];
-    var i;
+    let newdata = [];
+    let i;
 
     // start at 1 to skip column definitions
     for(i = 1; i < data.length; i++){
@@ -266,18 +266,19 @@ function parseData(data){
 
 /** Get only the last 150 entries if there is a lot of data points
  * @param {object} data parsed CSV data produced by the parseData function
+ * @param {object} n The number of entries to trim the data to if more than n
  * @returns {object} a new object containing only the last 15 entries
  * 
  */
-function trimData(data){
-    var i;
-    var newdata = [];
+function trimData(data, n){
+    let i;
+    let newdata = [];
 
-    if(data.length <= 150){
+    if(data.length <= n){
         return data;
     }
 
-    for(i = data.length-150; i < data.length; i++){
+    for(i = data.length-n; i < data.length; i++){
         newdata.push(data[i]);
     }
     return newdata;
@@ -292,11 +293,11 @@ function trimData(data){
 function makeGraph(element, parseData){
     // Remove the previous graph if it exists
     $("#line-graph").empty();
-    var graphData;
+    let graphData;
     
     // If more than 15 data points, only show most recent 15
-    if(parseData.length > 150){
-        graphData = trimData(parseData);
+    if(parseData.length > 100){
+        graphData = trimData(parseData, 100);
     } else {
         graphData = parseData;
     }
@@ -338,7 +339,7 @@ function CSVToArray(strData, strDelimiter){
     strDelimiter = (strDelimiter || ",");
 
     // Create a regular expression to parse the CSV values.
-    var objPattern = new RegExp((
+    let objPattern = new RegExp((
             // Delimiters.
             "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
 
@@ -407,7 +408,7 @@ function CSVToArray(strData, strDelimiter){
  * 
  */
 function getDateString(rawdate){
-    var parsed = new Date(rawdate);
+    let parsed = new Date(rawdate);
     return parsed.toLocaleString();
 }
 
